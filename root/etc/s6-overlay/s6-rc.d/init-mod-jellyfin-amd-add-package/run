@@ -17,7 +17,13 @@ if [ ! -f "/etc/apt/sources.list.d/kisak-mesa.list" ]; then
     echo "deb http://ppa.launchpad.net/kisak/kisak-mesa/ubuntu ${DISTRIB_CODENAME} main" > /etc/apt/sources.list.d/kisak-mesa.list
 fi
 
-pkgs='mesa-vdpau-drivers mesa-va-drivers mesa-vdpau-drivers libdrm-radeon1'
+if [ ! -f "/etc/apt/sources.list.d/rocm.list" ]; then
+    echo "**** Adding rocm repo ****"
+    wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | apt-key add -
+    echo "deb [arch=amd64] https://repo.radeon.com/rocm/apt/4.5/ ubuntu main" > /etc/apt/sources.list.d/rocm.list
+fi
+
+pkgs='mesa-vdpau-drivers mesa-va-drivers mesa-vdpau-drivers libdrm-radeon1 rocm-opencl rocm-utils'
 
 install=false
 for pkg in $pkgs; do

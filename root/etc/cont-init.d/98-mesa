@@ -6,7 +6,7 @@ if [ ! -f "/usr/bin/apt" ]; then
     exit 0
 fi
 
-pkgs='mesa-vdpau-drivers mesa-va-drivers mesa-vdpau-drivers libdrm-radeon1'
+pkgs='mesa-vdpau-drivers mesa-va-drivers mesa-vdpau-drivers libdrm-radeon1 rocm-opencl rocm-utils'
 
 install=false
 for pkg in $pkgs; do
